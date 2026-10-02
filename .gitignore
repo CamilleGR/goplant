@@ -1,0 +1,4 @@
+dist/*
+implant/
+.claude/
+.DS_Store
