@@ -2,9 +2,9 @@ package cli
 
 import (
 	"fmt"
-	"goplant/internal/builder"
-	"goplant/internal/server"
-	"goplant/internal/template"
+	"github.com/CamilleGR/goplant/internal/builder"
+	"github.com/CamilleGR/goplant/internal/server"
+	"github.com/CamilleGR/goplant/internal/template"
 	"math/rand"
 	"os"
 	"strings"

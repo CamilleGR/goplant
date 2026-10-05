@@ -1,7 +1,7 @@
 package main
 
 import (
-	"goplant/internal/cli"
+	"github.com/CamilleGR/goplant/internal/cli"
 	"os"
 )
 

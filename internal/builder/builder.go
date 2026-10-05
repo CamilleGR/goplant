@@ -2,7 +2,7 @@ package builder
 
 import (
 	"fmt"
-	"goplant/internal/template"
+	"github.com/CamilleGR/goplant/internal/template"
 	"os"
 	"os/exec"
 	"path/filepath"

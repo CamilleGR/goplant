@@ -3,8 +3,8 @@ package server
 import (
 	"encoding/base64"
 	"fmt"
-	"goplant/internal/builder"
-	"goplant/internal/template"
+	"github.com/CamilleGR/goplant/internal/builder"
+	"github.com/CamilleGR/goplant/internal/template"
 	"math/rand"
 	"net/http"
 	"os"
