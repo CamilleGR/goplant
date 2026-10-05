@@ -1,18 +1,36 @@
 
 # Goplant
 
+![goplant logo](img/goplant_logo.png)
 
-Génère un implant executable simple. 
+Goplant generates executable reverse shell implants for pentesting and CTF. 
 
-## Features à implémenter:  
-- Chiffrement et randomization du binaire 
-- Obfuscation du code 
-- Ligne de commande propre 
-- Installation simple depuis github 
-- Stager ? Serveur pour servir l'implant ? 
 
-## Objectif 
+```bash
+Goplant generates executable reverse shell implants for pentesting
 
-- A utiliser avec Penelope ou nc 
-- l'implant doit bypass des AV simple 
-- L'objectif est qu'il soit le plus simple possible d'obtenir un reverse shell 
+Usage:
+  goplant [command]
+
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  generate    Generate a reverse shell implant
+  help        Help about any command
+  list        List available templates
+  serve       Start an implant server
+
+Flags:
+  -h, --help   help for goplant
+
+Use "goplant [command] --help" for more information about a command.
+```
+
+## Generate 
+
+The `generate` command generate a new executable accordingly to targetted arch ans operating system. It take lhost and lport parameters as metasploit or msfvenom.
+
+## Serve 
+
+The serve command allows you to directly generate an implant and serve it on a web server. It reduce the number of action to get your reverse shell. 
+
+Goplant show you some example commands to execute to download and execute your payload

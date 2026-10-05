@@ -80,7 +80,7 @@ var GenerateCmd = &cobra.Command{
 var ServeCmd = &cobra.Command{
 	Use:   "serve",
 	Short: "Start an implant server",
-	Long:  "Start a server to serve and manage generated implants",
+	Long:  "Start a server to serve generated implants",
 	Run: func(cmd *cobra.Command, args []string) {
 		// Récupérer les flags
 		lhost, _ := cmd.Flags().GetString("lhost")
