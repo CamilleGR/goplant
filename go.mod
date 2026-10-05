@@ -1,4 +1,4 @@
-module goplant
+module github.com/CamilleGR/goplant
 
 go 1.27.1
 
