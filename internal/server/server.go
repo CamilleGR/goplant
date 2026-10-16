@@ -73,9 +73,7 @@ func (s *Server) Start() error {
 
 	fmt.Printf("🪴Listen on:   http://%s%s\n", addr, s.plantPath)
 	fmt.Printf("\n🪴 Implant : %s/%s --> %s:%s\n", s.targetOS, s.arch, s.lhost, s.lport)
-	// fmt.Printf("   - Listener: %s:%s\\n", s.lhost, s.lport)
-	// fmt.Printf("   - Platform: %s/%s\\n", s.targetOS, s.arch)
-	fmt.Printf("\n\n🪴 Payloads : \n")
+
 	PrintCommandExamples(s)
 
 	return s.httpServer.ListenAndServe()
